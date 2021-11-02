@@ -1,0 +1,53 @@
+9963a5a076c03c65a144795a2e68e75e0975794fNär använder man add respektive commit?
+Man använder 'add' och 'commit' när man ska lägga till ändringar. 
+Add används när man lägger till ändringen  i projektet innan den lagras i 'commit'. 
+Commit används som att ta 'snapshots' när man har gjort sin senaste ändring i projektet.    
+
+Vad är pull repektive push?
+'pull' är kommando som används när man ska hämta alla sina ändringar från GitHub repository och mergar dem i sin lokala repository.
+'push' är kommando som publicerar sin senaste commit-historik i GitHub.
+
+När använder man log respektive status?
+'log' används för att se sina commits. 
+'status' används för att kolla hur statusen är, hur statusen ser ut på din working directory och din staging area. 
+
+Hur kan man formulera sig i sina commit-meddelanden?
+Vara tydlig med sina kommentarer, vara tydlig med sina ändringar.
+
+Det finns flera sätt att rulla tillbaka koden till ett tidigare tillstånd. 
+Förklara skillnaden och motivera när man skulle använda den ena eller 
+andra metoden. 
+Ge exempel på de kommandon du använder för att göra detta och vissa att 
+det fungerar, vilken output du fick från git-kommandona.
+Tips: Gör exemplen med att backa i en branch så att master fortfarande 
+är korrekt.
+
+För att rulla tillbaka koden till ett tidigare tillstånd kan man använda sig av 'checkout/restore' och 'stash'. 
+Hur man använder sig av 'cheskout' är att man kan ge argummentet t.ex 'git checkout HEAD~1 GuessingGame.java". Vad argummentet gör att den kommer gå tillbaka till min senaste commit,
+och det innebär då kommer den att ett steg bakåt och ta tillbaka min förengående ändring i koden (om det skulle stå "HEAD~2" kommer det att gå tillbaka
+två steg tillbaka till ändringen).   
+Vad 'stash' gör at att den tar uncommited ändringar (i både staged och unstaged), sparar dem för att användas senare (som reserv) och 
+sedan revert:ar dem till en arbetande katalog (working directory). Om man tar föregående exempel med 'checkout' (git checkout HEAD~1 GuessingGame.java), kör 
+argummentet och sedan kommer man på att man ångrar den argummentet. Då kan man köra argummentet 'git stash' och då får man tillbaka ändringen. 
+Man kan dessutom ta bord ändringar från stash:en och re-apply till arbetande katalogen mha 'stash pop'. Att poppa sina stash tar bort ändringar från sin stash
+och lägger till dem igen på sin arbetande kopia. 
+
+
+Commit
+Man kan använda sig av att 'reset' för att gå tillbaka till sina commits. Men om man gör det, kommer dina commits att försvinna,
+t.ex 'git reset --hard HEAD~1' kommer att ta bort den senaste commit som man har gjort. Vad --hard gör är att den reset:ar HEAD 
+till en annan commit från history till paperskorgen. Den försvinner helt. 
+Om man vill inte att commiten ska försvinna helt kan man även använda sig av dessa flaggor: --soft eller --mixed.
+--soft säger till Git att reset:a HEAD till en annan commit (stage/index). 
+--mixed reset:ar HEAD till en annan commit från history till working directory.   
+
+Man kan även använda sig av 'revert'. Var revert gör är att man kan "redigera" sina commits. 
+Jag testade att skriva argummenten 'git revert HEAD~1' och när jag gjorde det, dyker textfil upp på den commiten jag ville ha och man kan 
+sedan redigera i textfilen vad man vill ha för kommentar i sin commit. När man har gjort det, blir det en ny commit men skillnaden är att
+i den commiten (där jag gjorde revert), så står det i commit att typen är en 'revert':
+
+be4117f (HEAD -> main) Revert "Deleted printer. Was unneccecary".
+
+
+ 
+
